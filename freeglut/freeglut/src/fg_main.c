@@ -224,7 +224,7 @@ static void fghCheckTimers( void )
 
     while( fgState.Timers.First )
     {
-        SFG_Timer *timer = fgState.Timers.First;
+		SFG_Timer *timer = static_cast<SFG_Timer *>(fgState.Timers.First);
 
         if( timer->TriggerTime > checkTime )
             /* Timers are sorted by triggerTime */
@@ -354,7 +354,7 @@ static int fghHavePendingWork (void)
 static fg_time_t fghNextTimer( void )
 {
     fg_time_t currentTime;
-    SFG_Timer *timer = fgState.Timers.First;    /* timers are sorted by trigger time, so only have to check the first */
+	SFG_Timer *timer = static_cast<SFG_Timer *>(fgState.Timers.First);    /* timers are sorted by trigger time, so only have to check the first */
 
     if( !timer )
         return INT_MAX;

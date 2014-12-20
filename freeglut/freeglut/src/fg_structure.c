@@ -181,7 +181,7 @@ void fgCloseWindows( )
 {
     while( fgStructure.WindowsToDestroy.First )
     {
-        SFG_WindowList *window_ptr = fgStructure.WindowsToDestroy.First;
+		SFG_WindowList *window_ptr = static_cast<SFG_WindowList *>(fgStructure.WindowsToDestroy.First);
         fgDestroyWindow( window_ptr->window );
         fgListRemove( &fgStructure.WindowsToDestroy, &window_ptr->node );
         free( window_ptr );
@@ -656,12 +656,12 @@ void fgListInsert(SFG_List *list, SFG_Node *next, SFG_Node *node)
 
     if( (node->Next = next) )
     {
-        prev = next->Prev;
+		prev = static_cast<SFG_Node *>(next->Prev);
         next->Prev = node;
     }
     else
     {
-        prev = list->Last;
+		prev = static_cast<SFG_Node *>(list->Last);
         list->Last = node;
     }
 

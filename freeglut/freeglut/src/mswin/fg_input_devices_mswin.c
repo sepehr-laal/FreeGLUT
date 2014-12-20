@@ -73,7 +73,7 @@ SERIALPORT *serial_open(const char *device){
       OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
     if (!fh) return NULL;
 
-    port = malloc(sizeof(SERIALPORT));
+	port = static_cast<SERIALPORT*>(malloc(sizeof(SERIALPORT)));
     ZeroMemory(port, sizeof(SERIALPORT));
     port->fh = fh;
 

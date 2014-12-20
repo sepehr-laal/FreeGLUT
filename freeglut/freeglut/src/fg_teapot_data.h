@@ -970,6 +970,8 @@ static int patchdata_teapot[GLUT_TEAPOT_N_INPUT_PATCHES][16] =
     {113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128  }
 };
 
+#include <GL\freeglut_std.h>
+
 static GLfloat cpdata_teapot[][3] =
 {
     { 1.40000f,  0.00000f,  2.40000f}, { 1.40000f, -0.78400f,  2.40000f},
