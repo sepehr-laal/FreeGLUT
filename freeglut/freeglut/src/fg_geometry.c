@@ -516,7 +516,7 @@ static void fghGenerateNormalVisualization(GLfloat *vertices, GLfloat *normals, 
 {
     int i,j;
     numNormalVertices = numVertices * 2;
-	verticesForNormalVisualization = static_cast<GLfloat *>(malloc(numNormalVertices * 3 * sizeof(GLfloat)));
+	verticesForNormalVisualization = (GLfloat *)(malloc(numNormalVertices * 3 * sizeof(GLfloat)));
 
     for (i=0,j=0; i<numNormalVertices*3/2; i+=3, j+=6)
     {
@@ -1112,8 +1112,8 @@ static void fghCircleTable(GLfloat **sint, GLfloat **cost, const int n, const GL
     const GLfloat angle = (halfCircle?1:2)*(GLfloat)M_PI/(GLfloat)( ( n == 0 ) ? 1 : n );
 
     /* Allocate memory for n samples, plus duplicate of first entry at the end */
-	*sint = static_cast<GLfloat *>(malloc(sizeof(GLfloat) * (size + 1)));
-	*cost = static_cast<GLfloat *>(malloc(sizeof(GLfloat) * (size + 1)));
+	*sint = (GLfloat *)(malloc(sizeof(GLfloat) * (size + 1)));
+	*cost = (GLfloat *)(malloc(sizeof(GLfloat) * (size + 1)));
 
     /* Bail out if memory allocation fails, fgError never returns */
     if (!(*sint) || !(*cost))
@@ -1176,8 +1176,8 @@ static void fghGenerateSphere(GLfloat radius, GLint slices, GLint stacks, GLfloa
     fghCircleTable(&sint2,&cost2, stacks,GL_TRUE);
 
     /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-	*vertices = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
-	*normals = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*vertices = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*normals = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
     if (!(*vertices) || !(*normals))
     {
         free(*vertices);
@@ -1270,8 +1270,8 @@ void fghGenerateCone(
     fghCircleTable(&sint,&cost,-slices,GL_FALSE);
 
     /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-	*vertices = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
-	*normals = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*vertices = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*normals = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
     if (!(*vertices) || !(*normals))
     {
         free(*vertices);
@@ -1355,8 +1355,8 @@ void fghGenerateCylinder(
     fghCircleTable(&sint,&cost,-slices,GL_FALSE);
 
     /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-	*vertices = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
-	*normals = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*vertices = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*normals = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
     if (!(*vertices) || !(*normals))
     {
         free(*vertices);
@@ -1458,8 +1458,8 @@ void fghGenerateTorus(
     fghCircleTable(&sphi,&cphi,-nSides,GL_FALSE);
 
     /* Allocate vertex and normal buffers, bail out if memory allocation fails */
-	*vertices = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
-	*normals = static_cast<GLfloat *>(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*vertices = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
+	*normals = (GLfloat *)(malloc((*nVert) * 3 * sizeof(GLfloat)));
     if (!(*vertices) || !(*normals))
     {
         free(*vertices);
@@ -1529,7 +1529,7 @@ static void fghCube( GLfloat dSize, GLboolean useWireMode )
         /* Need to build new vertex list containing vertices for cube of different size */
         int i;
 
-		vertices = static_cast<GLfloat *>(malloc(CUBE_VERT_ELEM_PER_OBJ * sizeof(GLfloat)));
+		vertices = (GLfloat *)(malloc(CUBE_VERT_ELEM_PER_OBJ * sizeof(GLfloat)));
 
         /* Bail out if memory allocation fails, fgError never returns */
         if (!vertices)
@@ -1574,8 +1574,8 @@ static void fghSierpinskiSponge ( int numLevels, double offset[3], GLfloat scale
     if (numTetr)
     {
         /* Allocate memory */
-		vertices = static_cast<GLfloat *>(malloc(numVert * 3 * sizeof(GLfloat)));
-		normals = static_cast<GLfloat *>(malloc(numVert * 3 * sizeof(GLfloat)));
+		vertices = (GLfloat *)(malloc(numVert * 3 * sizeof(GLfloat)));
+		normals = (GLfloat *)(malloc(numVert * 3 * sizeof(GLfloat)));
         /* Bail out if memory allocation fails, fgError never returns */
         if (!vertices || !normals)
         {
@@ -1621,8 +1621,8 @@ static void fghSphere( GLfloat radius, GLint slices, GLint stacks, GLboolean use
          * bunch for each slice.
          */
 
-		sliceIdx = static_cast<GLushort *>(malloc(slices*(stacks + 1)*sizeof(GLushort)));
-		stackIdx = static_cast<GLushort *>(malloc(slices*(stacks - 1)*sizeof(GLushort)));
+		sliceIdx = (GLushort *)(malloc(slices*(stacks + 1)*sizeof(GLushort)));
+		stackIdx = (GLushort *)(malloc(slices*(stacks - 1)*sizeof(GLushort)));
         if (!(stackIdx) || !(sliceIdx))
         {
             free(stackIdx);
@@ -1672,7 +1672,7 @@ static void fghSphere( GLfloat radius, GLint slices, GLint stacks, GLboolean use
         GLushort offset;
 
         /* Allocate buffers for indices, bail out if memory allocation fails */
-		stripIdx = static_cast<GLushort *>(malloc((slices + 1) * 2 * (stacks)*sizeof(GLushort)));
+		stripIdx = (GLushort *)(malloc((slices + 1) * 2 * (stacks)*sizeof(GLushort)));
         if (!(stripIdx))
         {
             free(stripIdx);
@@ -1747,8 +1747,8 @@ static void fghCone( GLfloat base, GLfloat height, GLint slices, GLint stacks, G
          * bunch for each slice.
          */
 
-		stackIdx = static_cast<GLushort *>(malloc(slices*stacks*sizeof(GLushort)));
-		sliceIdx = static_cast<GLushort *>(malloc(slices * 2 * sizeof(GLushort)));
+		stackIdx = (GLushort *)(malloc(slices*stacks*sizeof(GLushort)));
+		sliceIdx = (GLushort *)(malloc(slices * 2 * sizeof(GLushort)));
         if (!(stackIdx) || !(sliceIdx))
         {
             free(stackIdx);
@@ -1794,7 +1794,7 @@ static void fghCone( GLfloat base, GLfloat height, GLint slices, GLint stacks, G
         GLushort offset;
 
         /* Allocate buffers for indices, bail out if memory allocation fails */
-		stripIdx = static_cast<GLushort *>(malloc((slices + 1) * 2 * (stacks + 1)*sizeof(GLushort)));    /*stacks +1 because of closing off bottom */
+		stripIdx = (GLushort *)(malloc((slices + 1) * 2 * (stacks + 1)*sizeof(GLushort)));    /*stacks +1 because of closing off bottom */
         if (!(stripIdx))
         {
             free(stripIdx);
@@ -1858,8 +1858,8 @@ static void fghCylinder( GLfloat radius, GLfloat height, GLint slices, GLint sta
          * bunch for each slice.
          */
 
-		stackIdx = static_cast<GLushort *>(malloc(slices*(stacks + 1)*sizeof(GLushort)));
-		sliceIdx = static_cast<GLushort *>(malloc(slices * 2 * sizeof(GLushort)));
+		stackIdx = (GLushort *)(malloc(slices*(stacks + 1)*sizeof(GLushort)));
+		sliceIdx = (GLushort *)(malloc(slices * 2 * sizeof(GLushort)));
         if (!(stackIdx) || !(sliceIdx))
         {
             free(stackIdx);
@@ -1905,7 +1905,7 @@ static void fghCylinder( GLfloat radius, GLfloat height, GLint slices, GLint sta
         GLushort offset;
 
         /* Allocate buffers for indices, bail out if memory allocation fails */
-		stripIdx = static_cast<GLushort *>(malloc((slices + 1) * 2 * (stacks + 2)*sizeof(GLushort)));    /*stacks +2 because of closing off bottom and top */
+		stripIdx = (GLushort *)(malloc((slices + 1) * 2 * (stacks + 2)*sizeof(GLushort)));    /*stacks +2 because of closing off bottom and top */
         if (!(stripIdx))
         {
             free(stripIdx);
@@ -1978,8 +1978,8 @@ static void fghTorus( GLfloat dInnerRadius, GLfloat dOuterRadius, GLint nSides, 
          * bunch for each ring.
          */
 
-		ringIdx = static_cast<GLushort *>(malloc(nRings*nSides*sizeof(GLushort)));
-		sideIdx = static_cast<GLushort *>(malloc(nSides*nRings*sizeof(GLushort)));
+		ringIdx = (GLushort *)(malloc(nRings*nSides*sizeof(GLushort)));
+		sideIdx = (GLushort *)(malloc(nSides*nRings*sizeof(GLushort)));
         if (!(ringIdx) || !(sideIdx))
         {
             free(ringIdx);
@@ -2015,7 +2015,7 @@ static void fghTorus( GLfloat dInnerRadius, GLfloat dOuterRadius, GLint nSides, 
         GLushort  *stripIdx;
 
         /* Allocate buffers for indices, bail out if memory allocation fails */
-		stripIdx = static_cast<GLushort *>(malloc((nRings + 1) * 2 * nSides*sizeof(GLushort)));
+		stripIdx = (GLushort *)(malloc((nRings + 1) * 2 * nSides*sizeof(GLushort)));
         if (!(stripIdx))
         {
             free(stripIdx);

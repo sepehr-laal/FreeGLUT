@@ -484,7 +484,7 @@ static void fghJoystickElementEnumerator ( SFG_Joystick *joy, void *element, voi
             return;
     }
 
-      static_cast<jsJoystick*>(vjs)->parseElement ( (CFDictionaryRef) element );
+      (jsJoystick*)(vjs)->parseElement ( (CFDictionaryRef) element );
 }
 
 /** element enumerator function : pass NULL for top-level*/

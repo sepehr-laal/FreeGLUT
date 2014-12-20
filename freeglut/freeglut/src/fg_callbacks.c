@@ -48,13 +48,13 @@ void FGAPIENTRY glutTimerFunc( unsigned int timeOut, FGCBTimer callback, int tim
 
     FREEGLUT_EXIT_IF_NOT_INITIALISED ( "glutTimerFunc" );
 
-	if ((timer = static_cast<SFG_Timer *>(fgState.FreeTimers.Last)))
+	if ((timer = (SFG_Timer *)(fgState.FreeTimers.Last)))
     {
         fgListRemove( &fgState.FreeTimers, &timer->Node );
     }
     else
     {
-		if (!(timer = static_cast<SFG_Timer *>(malloc(sizeof(SFG_Timer)))))
+		if (!(timer = (SFG_Timer *)(malloc(sizeof(SFG_Timer)))))
             fgError( "Fatal error: "
                      "Memory allocation failure in glutTimerFunc()" );
     }
@@ -64,7 +64,7 @@ void FGAPIENTRY glutTimerFunc( unsigned int timeOut, FGCBTimer callback, int tim
     timer->TriggerTime = fgElapsedTime() + timeOut;
 
     /* Insert such that timers are sorted by end-time */
-	for (node = static_cast<SFG_Timer *>(fgState.Timers.First); node; node = static_cast<SFG_Timer *>(node->Node.Next))
+	for (node = (SFG_Timer *)(fgState.Timers.First); node; node = (SFG_Timer *)(node->Node.Next))
     {
         if( node->TriggerTime > timer->TriggerTime )
             break;
