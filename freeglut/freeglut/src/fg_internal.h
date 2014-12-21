@@ -28,6 +28,8 @@
 #ifndef  FREEGLUT_INTERNAL_H
 #define  FREEGLUT_INTERNAL_H
 
+#include <GL/freeglut_std.h>
+
 #ifdef HAVE_CONFIG_H
 #    include "config.h"
 #endif

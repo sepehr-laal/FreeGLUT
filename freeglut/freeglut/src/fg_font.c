@@ -49,7 +49,6 @@ extern SFG_Font fgFontTimesRoman24;
 extern SFG_StrokeFont fgStrokeRoman;
 extern SFG_StrokeFont fgStrokeMonoRoman;
 
-
 /* -- PRIVATE FUNCTIONS ---------------------------------------------------- */
 
 /*

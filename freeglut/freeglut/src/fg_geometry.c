@@ -319,8 +319,8 @@ static void fghDrawGeometryWire20(GLfloat *vertices, GLfloat *normals, GLsizei n
     if (vbo_coords) {
         fghEnableVertexAttribArray(attribute_v_coord);
         fghBindBuffer(FGH_ARRAY_BUFFER, vbo_coords);
-        fghVertexAttribPointer(
-            attribute_v_coord,  /* attribute */
+		fghVertexAttribPointer(
+			attribute_v_coord,  /* attribute */
             3,                  /* number of elements per vertex, here (x,y,z) */
             GL_FLOAT,           /* the type of each element */
             GL_FALSE,           /* take our values as-is */
