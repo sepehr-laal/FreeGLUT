@@ -473,8 +473,7 @@ typedef void (*SFG_Proc)();
 #define SET_WCB(window,cbname,func)                            \
 do                                                             \
 {                                                              \
-    if( FETCH_WCB( window, cbname ) != (SFG_Proc)(func) )      \
-        (((window).CallBacks[WCB_ ## cbname]) = (SFG_Proc)(func)); \
+        (window).CallBacks.m_FGCB ## cbname = func;	   \
 } while( 0 )
 
 /*
@@ -489,7 +488,7 @@ do                                                             \
  * type.
  */
 #define FETCH_WCB(window,cbname) \
-    ((window).CallBacks[WCB_ ## cbname])
+    (window).CallBacks.m_FGCB ## cbname
 
 /*
  * INVOKE_WCB() is used as:
@@ -516,9 +515,8 @@ do                                            \
 {                                             \
     if( FETCH_WCB( window, cbname ) )         \
     {                                         \
-        FGCB ## cbname func = (FGCB ## cbname)(FETCH_WCB( window, cbname )); \
         fgSetWindow( &window );               \
-        func arg_list;                        \
+        FETCH_WCB( window, cbname ) arg_list; \
     }                                         \
 } while( 0 )
 #else
@@ -632,6 +630,40 @@ struct tagSFG_MenuEntry
     int                 Width;                  /* Label's width in pixels   */
 };
 
+struct tagSFG_Former_Callbacks_Array
+{
+std::function<void(void)> m_FGCBDisplay;
+std::function<void(int, int)> m_FGCBReshape;
+std::function<void(int, int)> m_FGCBPosition;
+std::function<void(int)> m_FGCBVisibility;
+std::function<void(unsigned char, int, int)> m_FGCBKeyboard;
+std::function<void(unsigned char, int, int)> m_FGCBKeyboardUp;
+std::function<void(int, int, int)> m_FGCBSpecial;
+std::function<void(int, int, int)> m_FGCBSpecialUp;
+std::function<void(int, int, int, int)> m_FGCBMouse;
+std::function<void(int, int, int, int)> m_FGCBMouseWheel;
+std::function<void(int, int)> m_FGCBMotion;
+std::function<void(int, int)> m_FGCBPassive;
+std::function<void(int)> m_FGCBEntry;
+std::function<void(int)> m_FGCBWindowStatus;
+std::function<void(unsigned int, int, int, int)> m_FGCBJoystick;
+std::function<void(void)> m_FGCBOverlayDisplay;
+std::function<void(int, int, int)> m_FGCBSpaceMotion;
+std::function<void(int, int, int)> m_FGCBSpaceRotation;
+std::function<void(int, int)> m_FGCBSpaceButton;
+std::function<void(int, int)> m_FGCBDials;
+std::function<void(int, int)> m_FGCBButtonBox;
+std::function<void(int, int)> m_FGCBTabletMotion;
+std::function<void(int, int, int, int)> m_FGCBTabletButton;
+std::function<void(void)> m_FGCBDestroy;
+std::function<void(int, int)> m_FGCBMultiEntry;
+std::function<void(int, int, int, int, int)> m_FGCBMultiButton;
+std::function<void(int, int, int)> m_FGCBMultiMotion;
+std::function<void(int, int, int)> m_FGCBMultiPassive;
+std::function<void()> m_FGCBInitContext;
+std::function<void(int)> m_FGCBAppStatus;
+};
+
 /*
  * A window, making part of freeglut windows hierarchy.
  * Should be kept portable.
@@ -645,7 +677,7 @@ struct tagSFG_Window
 
     SFG_Context         Window;                 /* Window and OpenGL context */
     SFG_WindowState     State;                  /* The window state          */
-    SFG_Proc            CallBacks[ TOTAL_CALLBACKS ]; /* Array of window callbacks */
+	tagSFG_Former_Callbacks_Array            CallBacks; /* Array of window callbacks */
     void               *UserData ;              /* For use by user           */
 
     SFG_Menu*       Menu[ FREEGLUT_MAX_MENUS ]; /* Menus appended to window  */

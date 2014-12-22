@@ -69,10 +69,10 @@ SFG_State fgState = { { -1, -1, GL_FALSE },  /* Position */
                       0,                     /* Time */
                       { NULL, NULL },         /* Timers */
                       { NULL, NULL },         /* FreeTimers */
-                      NULL,                   /* IdleCallback */
+					  []{},                   /* IdleCallback */
                       0,                      /* ActiveMenus */
-                      NULL,                   /* MenuStateCallback */
-                      NULL,                   /* MenuStatusCallback */
+					  [](int){},              /* MenuStateCallback */
+					  [](int,int,int){},      /* MenuStatusCallback */
                       FREEGLUT_MENU_FONT,
                       { -1, -1, GL_TRUE },    /* GameModeSize */
                       -1,                     /* GameModeDepth */
@@ -93,8 +93,8 @@ SFG_State fgState = { { -1, -1, GL_FALSE },  /* Position */
                       0,                      /* OpenGL ContextFlags */
                       0,                      /* OpenGL ContextProfile */
                       0,                      /* HasOpenGL20 */
-                      NULL,                   /* ErrorFunc */
-                      NULL                    /* WarningFunc */
+					  [](const char *fmt, va_list ap){}, /* ErrorFunc */
+					  [](const char *fmt, va_list ap){}  /* WarningFunc */
 };
 
 
@@ -296,10 +296,6 @@ void fgDeinitialize( void )
 
     fgListInit( &fgState.Timers );
     fgListInit( &fgState.FreeTimers );
-
-    fgState.IdleCallback = NULL;
-    fgState.MenuStateCallback = ( FGCBMenuState )NULL;
-    fgState.MenuStatusCallback = ( FGCBMenuStatus )NULL;
 
     fgState.SwapCount   = 0;
     fgState.SwapTime    = 0;

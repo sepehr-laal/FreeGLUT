@@ -144,9 +144,12 @@
 #   include <GL/glu.h>
 #endif
 
+}
+
 // freeglut types visible in this header
 #include "freeglut_types.h"
 
+extern "C" {
 /*
  * GLUT API macro definitions -- the special key codes:
  */

@@ -216,7 +216,7 @@ void FGAPIENTRY glutVisibilityFunc( FGCBVisibility callback )
     if( callback )
         glutWindowStatusFunc( fghVisibility );
     else
-        glutWindowStatusFunc( NULL );
+		glutWindowStatusFunc([](int){});
 }
 
 /*
