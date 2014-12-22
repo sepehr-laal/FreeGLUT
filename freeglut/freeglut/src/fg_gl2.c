@@ -42,6 +42,15 @@ void FGAPIENTRY glutSetVertexAttribTexCoord2(GLint attrib) {
         fgStructure.CurrentWindow->Window.attribute_v_texture = attrib;
 }
 
+FGH_PFNGLGENBUFFERSPROC fghGenBuffers;
+FGH_PFNGLDELETEBUFFERSPROC fghDeleteBuffers;
+FGH_PFNGLBINDBUFFERPROC fghBindBuffer;
+FGH_PFNGLBUFFERDATAPROC fghBufferData;
+FGH_PFNGLENABLEVERTEXATTRIBARRAYPROC fghEnableVertexAttribArray;
+FGH_PFNGLDISABLEVERTEXATTRIBARRAYPROC fghDisableVertexAttribArray;
+FGH_PFNGLVERTEXATTRIBPOINTERPROC fghVertexAttribPointer;
+
+extern "C" {
 void fgInitGL2() {
 #ifdef GL_ES_VERSION_2_0
     fgState.HasOpenGL20 = (fgState.MajorVersion >= 2);
@@ -59,4 +68,5 @@ void fgInitGL2() {
 #undef CHECK
     fgState.HasOpenGL20 = 1;
 #endif
+}
 }
