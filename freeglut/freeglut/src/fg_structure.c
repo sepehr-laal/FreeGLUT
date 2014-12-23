@@ -53,12 +53,14 @@ extern void fghDefaultReshape(int width, int height);
 
 static void fghClearCallBacks( SFG_Window *window )
 {
-    /*if( window )
-    {
-        int i;
-        for( i = 0; i < TOTAL_CALLBACKS; ++i )
-            window->CallBacks[ i ] = NULL;
-    }*/
+#ifndef FREEGLUT_STATE_AWARE_CALLBACKS
+	if (window)
+	{
+		int i;
+		for (i = 0; i < TOTAL_CALLBACKS; ++i)
+			window->CallBacks[i] = NULL;
+	}
+#endif
 }
 
 /*
