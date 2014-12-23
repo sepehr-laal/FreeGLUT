@@ -144,10 +144,54 @@
 #   include <GL/glu.h>
 #endif
 
-}
+} //!end of extern "C"
 
-// freeglut types visible in this header
-#include "freeglut_types.h"
+// Note: std::function typedefs cannot have C linkage
+// and they actually do not need to!
+
+#include <functional>
+
+// Freeglut callback types
+
+typedef std::function<void(void)>							FGCBDisplay;
+typedef std::function<void(int, int)>						FGCBReshape;
+typedef std::function<void(int, int)>						FGCBPosition;
+typedef std::function<void(int)>							FGCBVisibility;
+typedef std::function<void(unsigned char, int, int)>		FGCBKeyboard;
+typedef std::function<void(unsigned char, int, int)>		FGCBKeyboardUp;
+typedef std::function<void(int, int, int)>					FGCBSpecial;
+typedef std::function<void(int, int, int)>					FGCBSpecialUp;
+typedef std::function<void(int, int, int, int)>				FGCBMouse;
+typedef std::function<void(int, int, int, int)>				FGCBMouseWheel;
+typedef std::function<void(int, int)>						FGCBMotion;
+typedef std::function<void(int, int)>						FGCBPassive;
+typedef std::function<void(int)>							FGCBEntry;
+typedef std::function<void(int)>							FGCBWindowStatus;
+typedef std::function<void(unsigned int, int, int, int)>	FGCBJoystick;
+typedef std::function<void(void)>							FGCBOverlayDisplay;
+typedef std::function<void(int, int, int)>					FGCBSpaceMotion;
+typedef std::function<void(int, int, int)>					FGCBSpaceRotation;
+typedef std::function<void(int, int)>						FGCBSpaceButton;
+typedef std::function<void(int, int)>						FGCBDials;
+typedef std::function<void(int, int)>						FGCBButtonBox;
+typedef std::function<void(int, int)>						FGCBTabletMotion;
+typedef std::function<void(int, int, int, int)>				FGCBTabletButton;
+typedef std::function<void(void)>							FGCBDestroy;
+typedef std::function<void(void)>							FGCBClose;
+typedef std::function<void(void)>							FGCBWMClose;
+typedef std::function<void(int, int)>						FGCBMultiEntry;
+typedef std::function<void(int, int, int, int, int)>		FGCBMultiButton;
+typedef std::function<void(int, int, int)>					FGCBMultiMotion;
+typedef std::function<void(int, int, int)>					FGCBMultiPassive;
+typedef std::function<void()>								FGCBInitContext;
+typedef std::function<void(int)>							FGCBAppStatus;
+typedef std::function<void(void)>							FGCBIdle;
+typedef std::function<void(int)>							FGCBTimer;
+typedef std::function<void(int)>							FGCBMenuState;
+typedef std::function<void(int, int, int)>					FGCBMenuStatus;
+typedef std::function<void(int)>							FGCBMenu;
+typedef std::function<void(const char *fmt, va_list ap)>	FGError;
+typedef std::function<void(const char *fmt, va_list ap)>	FGWarning;
 
 extern "C" {
 /*

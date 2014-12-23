@@ -203,11 +203,6 @@
 #include "blackberry/fg_internal_blackberry.h"
 #endif
 
-
-/* -- GLOBAL TYPE DEFINITIONS ---------------------------------------------- */
-#include <Gl\freeglut_types.h>
-
-
 /* A list structure */
 typedef struct tagSFG_List SFG_List;
 struct tagSFG_List
