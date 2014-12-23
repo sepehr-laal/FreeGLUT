@@ -77,9 +77,16 @@ extern FGH_PFNGLDISABLEVERTEXATTRIBARRAYPROC fghDisableVertexAttribArray;
 extern FGH_PFNGLVERTEXATTRIBPOINTERPROC fghVertexAttribPointer;
 
 
-#    endif
-extern "C" {
+#endif
+
+#ifdef __cplusplus
+	extern "C" {
+#endif // A C++ compiler needs this linkage.
+
 extern void fgInitGL2();
-}
+
+#ifdef __cplusplus
+	}
+#endif
 
 #endif

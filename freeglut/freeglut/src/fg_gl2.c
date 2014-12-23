@@ -50,7 +50,10 @@ FGH_PFNGLENABLEVERTEXATTRIBARRAYPROC fghEnableVertexAttribArray;
 FGH_PFNGLDISABLEVERTEXATTRIBARRAYPROC fghDisableVertexAttribArray;
 FGH_PFNGLVERTEXATTRIBPOINTERPROC fghVertexAttribPointer;
 
-extern "C" {
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
 void fgInitGL2() {
 #ifdef GL_ES_VERSION_2_0
     fgState.HasOpenGL20 = (fgState.MajorVersion >= 2);
@@ -69,4 +72,7 @@ void fgInitGL2() {
     fgState.HasOpenGL20 = 1;
 #endif
 }
-}
+
+#ifdef __cplusplus
+	}
+#endif
