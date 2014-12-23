@@ -69,10 +69,23 @@ SFG_State fgState = { { -1, -1, GL_FALSE },  /* Position */
                       0,                     /* Time */
                       { NULL, NULL },         /* Timers */
                       { NULL, NULL },         /* FreeTimers */
+
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
 					  []{},                   /* IdleCallback */
-                      0,                      /* ActiveMenus */
+#else
+					  NULL,					  /* IdleCallback */
+#endif
+
+					  0,                      /* ActiveMenus */
+
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
 					  [](int){},              /* MenuStateCallback */
 					  [](int,int,int){},      /* MenuStatusCallback */
+#else
+					  NULL,					  /* MenuStateCallback */
+					  NULL,					  /* MenuStatusCallback */
+#endif
+
                       FREEGLUT_MENU_FONT,
                       { -1, -1, GL_TRUE },    /* GameModeSize */
                       -1,                     /* GameModeDepth */
@@ -93,8 +106,15 @@ SFG_State fgState = { { -1, -1, GL_FALSE },  /* Position */
                       0,                      /* OpenGL ContextFlags */
                       0,                      /* OpenGL ContextProfile */
                       0,                      /* HasOpenGL20 */
+
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
 					  [](const char *fmt, va_list ap){}, /* ErrorFunc */
 					  [](const char *fmt, va_list ap){}  /* WarningFunc */
+#else
+					  NULL,					  /* ErrorFunc */
+					  NULL					  /* WarningFunc */
+#endif
+
 };
 
 
@@ -296,6 +316,12 @@ void fgDeinitialize( void )
 
     fgListInit( &fgState.Timers );
     fgListInit( &fgState.FreeTimers );
+
+#ifndef FREEGLUT_STATE_AWARE_CALLBACKS
+	fgState.IdleCallback = NULL;
+	fgState.MenuStateCallback = (FGCBMenuState)NULL;
+	fgState.MenuStatusCallback = (FGCBMenuStatus)NULL;
+#endif
 
     fgState.SwapCount   = 0;
     fgState.SwapTime    = 0;
