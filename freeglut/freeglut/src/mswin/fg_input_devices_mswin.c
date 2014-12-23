@@ -37,16 +37,20 @@ typedef struct {
    DCB dcb_save;
 } SERIALPORT;
 
-extern "C" {
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
 /* Serial Port Prototypes */
-SERIALPORT *serial_open ( const char *device );
-void serial_close ( SERIALPORT *port );
-int serial_getchar ( SERIALPORT *port );
-int serial_putchar ( SERIALPORT *port, unsigned char ch );
-void serial_flush ( SERIALPORT *port );
+SERIALPORT*		serial_open ( const char *device );
+void			serial_close ( SERIALPORT *port );
+int				serial_getchar ( SERIALPORT *port );
+int				serial_putchar ( SERIALPORT *port, unsigned char ch );
+void			serial_flush ( SERIALPORT *port );
 
-}
+#ifdef __cplusplus
+	}
+#endif
 
 
 void fgPlatformRegisterDialDevice ( const char *dial_device )
@@ -65,7 +69,10 @@ void fgPlatformRegisterDialDevice ( const char *dial_device )
         }
 }
 
-extern "C" {
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
 /*  Serial Port Functions */
 SERIALPORT *serial_open(const char *device){
     HANDLE fh;
@@ -128,4 +135,7 @@ void serial_flush ( SERIALPORT *port )
 {
     FlushFileBuffers(port->fh);
 }
-}
+
+#ifdef __cplusplus
+	}
+#endif

@@ -70,13 +70,22 @@ typedef struct _serialport SERIALPORT;
 #define IS_INIT_EVENT(ch)       ((ch)==DIAL_INITIALIZED)
 
 /*****************************************************************/
-extern "C" {
-extern SERIALPORT *serial_open ( const char *device );
-extern void serial_close ( SERIALPORT *port );
-extern int serial_getchar ( SERIALPORT *port );
-extern int serial_putchar ( SERIALPORT *port, unsigned char ch );
-extern void serial_flush ( SERIALPORT *port );
-}
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
+// These serial stuff must have extern "C" Linkage
+// to be passed under a C++ compiler.
+
+extern SERIALPORT*	serial_open ( const char *device );
+extern void			serial_close ( SERIALPORT *port );
+extern int			serial_getchar ( SERIALPORT *port );
+extern int			serial_putchar ( SERIALPORT *port, unsigned char ch );
+extern void			serial_flush ( SERIALPORT *port );
+
+#ifdef __cplusplus
+	}
+#endif
 
 extern void fgPlatformRegisterDialDevice ( const char *dial_device );
 static void send_dial_event(int dial, int value);
