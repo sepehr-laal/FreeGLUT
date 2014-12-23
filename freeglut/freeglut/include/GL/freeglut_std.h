@@ -144,15 +144,16 @@
 #   include <GL/glu.h>
 #endif
 
-} //!end of extern "C"
+#ifdef __cplusplus
+	} // pause C linkage
+#endif
 
 // Note: std::function typedefs cannot have C linkage
 // and they actually do not need to!
 
-#include <functional>
-
 // Freeglut callback types
 
+#include <functional>
 typedef std::function<void(void)>							FGCBDisplay;
 typedef std::function<void(int, int)>						FGCBReshape;
 typedef std::function<void(int, int)>						FGCBPosition;
@@ -193,7 +194,9 @@ typedef std::function<void(int)>							FGCBMenu;
 typedef std::function<void(const char *fmt, va_list ap)>	FGError;
 typedef std::function<void(const char *fmt, va_list ap)>	FGWarning;
 
-extern "C" {
+#ifdef __cplusplus
+	extern "C" { // continue C linkage
+#endif
 /*
  * GLUT API macro definitions -- the special key codes:
  */
