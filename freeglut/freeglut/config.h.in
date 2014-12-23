@@ -25,4 +25,6 @@
 
 /* should I build with state-aware callbacks? */
 /* state-aware needs C++11 and <functional> header */
+#ifndef FREEGLUT_STATE_AWARE_CALLBACKS
 #cmakedefine FREEGLUT_STATE_AWARE_CALLBACKS
+#endif
