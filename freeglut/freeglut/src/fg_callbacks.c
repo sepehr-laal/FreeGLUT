@@ -54,10 +54,17 @@ void FGAPIENTRY glutTimerFunc( unsigned int timeOut, FGCBTimer callback, int tim
     }
     else
     {
-		if (!(timer = (SFG_Timer *)(malloc(sizeof(SFG_Timer)))))
-            fgError( "Fatal error: "
-                     "Memory allocation failure in glutTimerFunc()" );
-    }
+
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
+		if (!(timer = new SFG_Timer())) {
+#else
+		if (!(timer = (SFG_Timer *)(malloc(sizeof(SFG_Timer))))) {
+#endif // _DEBUG
+			fgError("Fatal error: "
+				"Memory allocation failure in glutTimerFunc()");
+		}
+    
+	}
 
     timer->Callback  = callback;
     timer->ID        = timerID;

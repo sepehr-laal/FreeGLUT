@@ -816,8 +816,12 @@ LRESULT CALLBACK fgPlatformWindowProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
                 );
             else
             {
-                fgStructure.MenuContext =
-                    (SFG_MenuContext *)malloc( sizeof(SFG_MenuContext) );
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
+				fgStructure.MenuContext = new SFG_MenuContext();
+#else
+				fgStructure.MenuContext =
+					(SFG_MenuContext *)malloc(sizeof(SFG_MenuContext));
+#endif
                 fgStructure.MenuContext->MContext =
                     wglCreateContext( window->Window.pContext.Device );
             }

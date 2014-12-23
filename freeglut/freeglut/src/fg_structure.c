@@ -152,8 +152,13 @@ SFG_Menu* fgCreateMenu( FGCBMenu menuCallback )
  */
 void fgAddToWindowDestroyList( SFG_Window* window )
 {
-    SFG_WindowList *new_list_entry =
-        ( SFG_WindowList* )malloc( sizeof(SFG_WindowList ) );
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
+	SFG_WindowList *new_list_entry = new SFG_WindowList();
+#else
+	SFG_WindowList *new_list_entry =
+		(SFG_WindowList*)malloc(sizeof(SFG_WindowList));
+#endif
+
     new_list_entry->window = window;
     fgListAppend( &fgStructure.WindowsToDestroy, &new_list_entry->node );
 
