@@ -32,6 +32,10 @@ OPTION(FREEGLUT_PRINT_ERRORS "Lib prints errors to stderr" ON)
 #MARK_AS_ADVANCED(FREEGLUT_PRINT_ERRORS)
 OPTION(FREEGLUT_PRINT_WARNINGS "Lib prints warnings to stderr" ON)
 #MARK_AS_ADVANCED(FREEGLUT_PRINT_WARNINGS)
+OPTION(FREEGLUT_STATE_AWARE_CALLBACKS "Substitute callback types \
+with C++11 std::function<T> types for flexibility. This requires a C++11 compiler \
+with a moderate support of <functional> header." OFF)
+#MARK_AS_ADVANCED(FREEGLUT_STATE_AWARE_CALLBACKS)
 
 # option to also copy .pdb files to install directory when executing
 # INSTALL target
