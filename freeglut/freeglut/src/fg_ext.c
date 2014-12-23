@@ -232,3 +232,16 @@ glutGetProcAddress( const char *procName )
 
     return ( p != NULL ) ? p : fgPlatformGetProcAddress( procName );
 }
+
+// A helper function so client code can check if their
+// distribution of Freeglut was built state-aware or not
+bool FGAPIENTRY glutBuiltStateAware()
+{
+
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
+	return true;
+#else
+	return false;
+#endif
+
+}

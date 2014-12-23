@@ -141,6 +141,7 @@ EXPORTS
 	glutExtensionSupported
 	glutReportErrors
 	glutGetProcAddress
+	glutBuiltStateAware
 	glutExit
 	glutFullScreenToggle
 	glutLeaveFullScreen

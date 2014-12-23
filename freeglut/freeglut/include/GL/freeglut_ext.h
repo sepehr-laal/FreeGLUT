@@ -199,6 +199,7 @@ FGAPI void    FGAPIENTRY glutSolidTeaspoon( double size );
  */
 typedef void (*GLUTproc)();
 FGAPI GLUTproc FGAPIENTRY glutGetProcAddress( const char *procName );
+FGAPI bool	   FGAPIENTRY glutBuiltStateAware();
 
 /*
  * Multi-touch/multi-pointer extensions
