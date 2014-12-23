@@ -215,8 +215,13 @@ void FGAPIENTRY glutVisibilityFunc( FGCBVisibility callback )
 
     if( callback )
         glutWindowStatusFunc( fghVisibility );
-    else
+	else {
+#ifdef FREEGLUT_STATE_AWARE_CALLBACKS
 		glutWindowStatusFunc([](int){});
+#else
+		glutWindowStatusFunc(NULL);
+#endif // FREEGLUT_STATE_AWARE_CALLBACKS
+	}
 }
 
 /*
