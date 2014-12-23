@@ -28,6 +28,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// This must be here, have no idea how it was functioning before.
+// freeglut_ext.h needs types in freeglut_std.h to function.
 #include "freeglut_std.h"
 
 #ifdef __cplusplus
