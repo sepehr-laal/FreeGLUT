@@ -148,11 +148,11 @@ key(unsigned char key, int x, int y)
 
 static void special (int key, int x, int y)
 {
-    switch (key)
+    /*switch (key)
     {
     default:
         break;
-    }
+    }*/ // Why is this here?
     glutPostRedisplay();
 }
 
@@ -218,9 +218,9 @@ main(int argc, char *argv[])
     glClearColor(0.4f,0.4f,0.4f,1);
     winmax = sw2sw > winmax ? sw2sw : winmax;
 
-	strings = malloc(sizeof(char *)*(winmax+1));
+	strings = (char**)malloc(sizeof(char *)*(winmax+1));
 	for (i=0;i<winmax+1;i++) {
-		strings[i] = malloc(sizeof(char)*MAXSTR+1);
+		strings[i] = (char*)malloc(sizeof(char)*MAXSTR+1);
 		strings[i][0]=0;
 	}
 
