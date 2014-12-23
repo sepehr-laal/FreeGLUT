@@ -1,6 +1,10 @@
 FreeGLUT
 ========
 
+To enable **state aware C++11 callbacks** on Windows, configure with (cmake) `-DFREEGLUT_STATE_AWARE_CALLBACKS=ON`. The build was tested on Windows and MSVC 2013.
+
+--------------------
+
 This readme file applies to the git clone of FreeGLUT's svn repo on [sourceforge.net](http://freeglut.sourceforge.net/) that is hosted on [github](https://github.com/dcnieho/FreeGLUT). This is provided here to enable user to contribute easier.
 
 Every effort is made to ensure that the ``git_master`` branch only progresses in a fastforward manner, but complete guarantees cannot be given as the [sourceforge.net trunk](https://sourceforge.net/p/freeglut/code/HEAD/tree/) is at all times leading.
